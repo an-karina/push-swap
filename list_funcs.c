@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:01:45 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/19 14:52:01 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/20 15:11:31 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	print_lst(t_list *lst)
 {
 	while (lst)
 	{
-		printf("%d index = %d\n", lst->number, lst->index);
+		printf("%d index = %d ", lst->number, lst->index);
+		(lst->in_stack == TRUE) ? printf("true\n") : printf("false\n");
 		lst = lst->next;
 	}
 }
