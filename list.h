@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/16 19:09:19 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/18 14:35:44 by jhleena          ###   ########.fr       */
+/*   Created: 2021/06/17 14:02:07 by jhleena           #+#    #+#             */
+/*   Updated: 2021/06/18 15:27:48 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# define TRUE 1
-# define FALSE 0
+#ifndef LIST_H
+# define LIST_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include "ps_commands.h"
+typedef struct s_list
+{
+	int				number;
+	int				index;
+	int				in_stack;
+	struct s_list	*next;
+	struct s_list	*previous;
+}					t_list;
 
-int		ft_is_digit(char c);
-int		ft_atoi(const char *str);
+int		new_lst(t_list **lst, int number);
+int		add_back_lst(t_list **lst, t_list **lst_new);
+void	print_lst(t_list *lst);
+void	free_list(t_list **lst);
 
 #endif

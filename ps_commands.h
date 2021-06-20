@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_list.c                                        :+:      :+:    :+:   */
+/*   ps_commands.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/31 23:45:02 by jhleena           #+#    #+#             */
-/*   Updated: 2021/05/31 23:47:56 by jhleena          ###   ########.fr       */
+/*   Created: 2021/06/18 14:33:30 by jhleena           #+#    #+#             */
+/*   Updated: 2021/06/19 14:28:11 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PS_COMMANDS_H
+# define PS_COMMANDS_H
 
-t_list	*ft_lstnew(int *content)
-{
-	t_list	*list;
+# include "list.h"
 
-	list = (t_list *)malloc(sizeof(t_list));
-	if (!(list))
-		return (NULL);
-	list->content = content;
-	list->next = NULL;
-	return (list);
-}
+void	swap(t_list *stack);
+void	push(t_list **stack_1, t_list **stack_2);
+void	rotate(t_list **stack);
+void	r_rotate(t_list **stack);
 
-void	ft_free_list(t_list **lst)
-{
-	t_list	*tmp;
-
-	while (*lst)
-	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		free(tmp->content);
-		free(tmp);
-	}
-}
+#endif
