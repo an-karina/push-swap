@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 19:09:19 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/18 14:35:44 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/21 15:47:25 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@
 
 int		ft_is_digit(char c);
 int		ft_atoi(const char *str);
+void	mark_up(t_list **stack_a, t_list **stack_b);
+int		get_index(t_list *stack, t_list *elem);
 
 #endif

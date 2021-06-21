@@ -6,19 +6,24 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:16:48 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/19 14:36:57 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/21 20:32:57 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_list *stack)
+void	swap(t_list **stack) // tmp1 tmp2 3
 {
-	int	tmp;
+	t_list	*tmp_1;
+	t_list	*tmp_2;
 
-	tmp = stack->number;
-	stack->number = stack->next->number;
-	stack->next->number = tmp;
+	tmp_1 = *stack;
+	tmp_2 = (*stack)->next;
+	(*stack)->next = tmp_2->next;
+	tmp_2->previous = NULL;
+	tmp_2->next = tmp_1;
+	tmp_2->next->previous = tmp_1;
+	*stack = tmp_2;
 }
 
 void	push(t_list **stack_1, t_list **stack_2)
