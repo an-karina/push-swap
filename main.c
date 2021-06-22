@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 19:09:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/20 19:46:18 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/22 21:20:17 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	create_list(int argc, char *argv[])
 	t_list	*stack_b;
 
 	stack_a = NULL;
+	stack_b = NULL;
 	if (argc == 1)
 		return (write(2, "Error: Wrong number of arguments\n", 34), FALSE);
 	while (*argv)

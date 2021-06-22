@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:51:41 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/22 20:49:18 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/22 22:49:58 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,22 @@ int	find_index(t_list *stack, int index)
 	int	ind_min;
 	int ind_max;
 
-	// ind_max = -1;
-	// ind_min = -1;
+	ind_max = -1;
+	ind_min = -1;
 	
-	ind_min = INT16_MAX;
-	ind_max = INT32_MIN;
+	ind_min = stack->index;
+	ind_max = stack->index;
 	while (stack)
 	{
-		if (stack->index > ind_max && stack->index < index)
+		if (stack->index > ind_min && stack->index < index)
 			ind_min = stack->index;
-		if (stack->index > ind_max)
+		if (stack->index > ind_max && stack->index > index)
 			ind_max = stack->index;
 		stack = stack->next;
 	}
-
-	// ind_min = stack->index;
-	// ind_max = stack->index;
-	// while (stack)
-	// {
-	// 	if (stack->index > ind_min && stack->index < index)
-	// 		ind_min = stack->index;
-	// 	if (stack->index > ind_max && stack->index > index)
-	// 		ind_max = stack->index;
-	// 	stack = stack->next;
-	// }
-	// printf("||%d %d||", ind_min, ind_max);
-	if (ind_min == INT32_MAX)
-		return (ind_max);
-	return (ind_min);
+	if (ind_min < index)
+		return (ind_min);
+	return (ind_max);
 }
 
 int	rr(int *place_in_a, int *place_in_b)
@@ -132,7 +120,7 @@ int	rra(int *place_in_a, int max)
 	int	amount;
 
 	amount = 0;
-	while (*place_in_a <= max)
+	while (*place_in_a < max)
 	{
 		++amount;
 		++(*place_in_a);
@@ -170,7 +158,7 @@ int	command_calculator(t_list *stack_a, t_list *stack_b, t_list *elem)
 		elem->steps.rr = rr(&place_in_a, &place_in_b);
 	if (place_in_a > (size_of_a / 2) && place_in_b > (size_of_b / 2))
 		elem->steps.rrr = rrr(&place_in_a, &place_in_b, size_of_a, size_of_b);
-	if (place_in_a != 1 && place_in_a <= (size_of_a / 2))
+	if (place_in_a != 0 && place_in_a <= (size_of_a / 2))
 		elem->steps.ra = ra(&place_in_a);
 	if (place_in_b != 1 && place_in_b <= (size_of_b / 2))
 		elem->steps.rb = rb(&place_in_b);
