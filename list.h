@@ -6,18 +6,31 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:02:07 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/18 15:27:48 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/22 14:22:54 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIST_H
 # define LIST_H
 
+typedef struct s_step
+{
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+}		t_step;
+
+
 typedef struct s_list
 {
 	int				number;
 	int				index;
 	int				in_stack;
+	int				comands;
+	t_step			steps;
 	struct s_list	*next;
 	struct s_list	*previous;
 }					t_list;

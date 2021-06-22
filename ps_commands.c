@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:16:48 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/21 20:32:57 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/22 20:12:03 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	push(t_list **stack_1, t_list **stack_2)
 	tmp = *stack_1;
 	*stack_1 = *stack_2;
 	*stack_2 = (*stack_2)->next;
-	(*stack_2)->previous = NULL;
+	if (*stack_2)
+		(*stack_2)->previous = NULL;
 	(*stack_1)->next = tmp;
 }
 
@@ -56,7 +57,9 @@ void	r_rotate(t_list **stack)
 	t_list	*tmp;
 
 	tmp = *stack;
-	while (tmp->next->next)
+	if (!tmp || !tmp->next)
+		return;
+	while (tmp->next && tmp->next->next)
 		tmp = tmp->next;
 	tmp->next->next = *stack;
 	tmp->next->previous = NULL;

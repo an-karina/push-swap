@@ -6,46 +6,13 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:39:51 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/21 20:20:07 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/22 20:14:21 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// int	greater_than(t_list *stack, t_list *elem)
-// {
-// 	int	amount;
-// 	t_list *tmp;
-	
-// 	amount = 0;
-// 	tmp = stack;
-// 	while (stack != elem)
-// 		stack = stack->next;
-// 	stack->in_stack = TRUE;
-// 	while (stack->next && stack->number <= stack->next->number)
-// 	{
-// 		stack->next->in_stack = TRUE;
-// 		stack = stack->next;
-// 	}
-// 	if (stack->next ==  NULL)
-// 	{
-// 		if (stack->number <= tmp->number)
-// 			stack->in_stack = TRUE;
-// 		stack = tmp;
-// 		while (stack != elem && stack->number <= stack->next->number)
-// 		{
-// 			stack->next->in_stack = TRUE;
-// 			stack = stack->next;
-// 		}
-// 	}
-// 	while (stack->next)
-// 	{
-// 		++amount;
-// 		stack->next->in_stack = FALSE;
-// 		stack = stack->next;
-// 	}
-// 	return (amount);
-// }
+
 
 int	get_index(t_list *stack, t_list *elem)
 {
@@ -55,7 +22,7 @@ int	get_index(t_list *stack, t_list *elem)
 
 	elem->in_stack = TRUE;
 	tmp = elem->next;
-	amount = 0;
+	amount = 1;
 	index = elem->index;
 	if (tmp == NULL)
 		tmp = stack;
@@ -77,6 +44,36 @@ int	get_index(t_list *stack, t_list *elem)
 			tmp = tmp->next;
 	}
 	return (amount);
+}
+
+void	do_r(t_list **stack_a, t_list **stack_b, t_list *cmd)
+{
+	while (cmd->steps.rr--)
+	{
+		rotate(stack_a);
+		rotate(stack_b);
+	}
+	while (cmd->steps.rrr--)
+	{
+		r_rotate(stack_a);
+		r_rotate(stack_b);
+	}
+	while (cmd->steps.ra--)
+	{
+		rotate(stack_a);
+	}
+	while (cmd->steps.rb--)
+	{
+		rotate(stack_b);
+	}
+	while (cmd->steps.rrb--)
+	{
+		r_rotate(stack_b);
+	}
+	while (cmd->steps.rra--)
+	{
+		r_rotate(stack_a);
+	}
 }
 
 void	mark_up(t_list **stack_a, t_list **stack_b)
@@ -129,13 +126,27 @@ void	mark_up(t_list **stack_a, t_list **stack_b)
 			write(1, "ra\n", 4);
 		}
 	}
-	// while (amount_min && (*stack_a)->in_stack == TRUE)
-	// 	rotate(stack_a);
-	// while (*stack_a && (*stack_a)->in_stack == FALSE)
-	// 	push(stack_b, stack_a);
-		--amount_min;
-	printf("___STACK_A___\n");
-	print_lst(*stack_a);
-	printf("___STACK_B___\n");
-	print_lst(*stack_b);
+	while (*stack_b)
+	{
+		tmp = *stack_b;
+		amount_min = (tmp)->comands = command_calculator(*stack_a, *stack_b, tmp);
+		tmp_min = tmp;
+		tmp = tmp->next;
+		while (tmp)
+		{
+			(tmp)->comands = command_calculator(*stack_a, *stack_b, tmp);
+			if (amount_min > (tmp)->comands)
+			{
+				amount_min =  (tmp)->comands;
+				tmp_min = tmp;
+			}
+			tmp = tmp->next;
+		}
+		do_r(stack_a, stack_b, tmp_min);
+		push(stack_a, stack_b);
+		printf("___STACK_A___\n");
+		print_lst(*stack_a);
+		printf("___STACK_B___\n");
+		print_lst(*stack_b);
+	}
 }

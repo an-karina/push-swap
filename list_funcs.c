@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:01:45 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/20 15:11:31 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/22 19:42:54 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ int	new_lst(t_list **lst, int number)
 	(*lst)->number = number;
 	(*lst)->in_stack = FALSE;
 	(*lst)->index = 0;
+	(*lst)->comands = 0;
+	(*lst)->steps.ra = 0;
+	(*lst)->steps.rb = 0;
+	(*lst)->steps.rr = 0;
+	(*lst)->steps.rra = 0;
+	(*lst)->steps.rrb = 0;
+	(*lst)->steps.rrr = 0;
 	(*lst)->next = NULL;
 	(*lst)->previous = NULL;
 	return (TRUE);
@@ -74,7 +81,8 @@ void	print_lst(t_list *lst)
 	while (lst)
 	{
 		printf("%d index = %d ", lst->number, lst->index);
-		(lst->in_stack == TRUE) ? printf("true\n") : printf("false\n");
+		(lst->in_stack == TRUE) ? printf("true ") : printf("false ");
+		printf("%d\n", lst->comands);
 		lst = lst->next;
 	}
 }
