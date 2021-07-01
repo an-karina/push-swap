@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:51:41 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/22 22:49:58 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:07:14 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	place_in_satck(t_list *stack, int index)
 	int	place;
 
 	place = 1;
-	while (stack->index != index)
+	while (stack && stack->index != index)
 	{
 		++place;
 		stack = stack->next;
@@ -38,25 +38,24 @@ int	place_in_satck(t_list *stack, int index)
 	return (place);
 }
 
-int	find_index(t_list *stack, int index)
+int	find_index(t_list *stack, int index)//8
 {
 	int	ind_min;
 	int ind_max;
 
 	ind_max = -1;
 	ind_min = -1;
-	
-	ind_min = stack->index;
-	ind_max = stack->index;
 	while (stack)
 	{
-		if (stack->index > ind_min && stack->index < index)
+		if (stack->index == index - 1)
+			return (stack->index);
+		if (stack->index > ind_min && stack->index < index)//10>10//1> 10
 			ind_min = stack->index;
-		if (stack->index > ind_max && stack->index > index)
+		if (stack->index > ind_max && stack->index > index)//10>10//
 			ind_max = stack->index;
 		stack = stack->next;
 	}
-	if (ind_min < index)
+	if (ind_min != -1 && ind_min < index)
 		return (ind_min);
 	return (ind_max);
 }

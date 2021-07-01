@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:01:45 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/22 19:42:54 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/30 11:15:56 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,45 @@ void	print_lst(t_list *lst)
 		printf("%d\n", lst->comands);
 		lst = lst->next;
 	}
+}
+
+void	new_lst_command(t_commands **lst, char *str)
+{
+	int		leangth;
+	int		i;
+	char	*tmp_str;
+
+	leangth = 0;
+	i = 0;
+	tmp_str = str;
+	while (*str)
+	{
+		++leangth;
+		++str;
+	}
+	*lst = (t_commands *)malloc(sizeof(t_commands));
+	(*lst)->command = (char *)malloc(sizeof(char) * leangth + 1);
+	while (*tmp_str)
+	{
+		(*lst)->command[i] = *tmp_str;
+		++i;
+		tmp_str++;
+	}
+	(*lst)->next = NULL;
+}
+
+void	add_back_lst_commands(t_commands **lst, t_commands **new_lst)
+{
+	t_commands *tmp;
+	
+	if (*lst == NULL)
+	{
+		*lst = *new_lst;
+		return ;
+	}
+	tmp = *lst;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = *new_lst;
+	return ; 
 }

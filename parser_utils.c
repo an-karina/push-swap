@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 09:58:49 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/17 14:22:19 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/24 11:44:28 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	_sign(char symb)
 	return (1);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, int *number)
 {
 	int			i;
 	long int	result;
@@ -46,11 +46,16 @@ int	ft_atoi(const char *str)
 	while (str[i] <= '9' && str[i] >= '0')
 	{
 		if ((result > 2147483647) && (sign == 1))
-			return (-1);
+			return (FALSE);
 		if ((result > 2147483648) && (sign == -1))
-			return (0);
+			return (FALSE);
 		result = 10 * result + (str[i] - '0');
 		i++;
 	}
-	return (result * sign);
+	if ((result > 2147483647) && (sign == 1))
+		return (FALSE);
+	if ((result > 2147483648) && (sign == -1))
+		return (FALSE);
+	*number = result * sign;
+	return (TRUE);
 }

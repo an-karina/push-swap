@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 19:09:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/22 21:20:17 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/06/30 13:52:41 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	create_stack_a(char *str, t_list **stack_a)
 {
-	int		number;
+	int		*number;
 	char	*tmp;
 	t_list	*lst;
 
@@ -27,7 +27,10 @@ static int	create_stack_a(char *str, t_list **stack_a)
 			return (write(2, "Error: invalid argument", 24), FALSE);
 		++(str);
 	}
-	if (!new_lst(&lst, ft_atoi(tmp)))
+	number = (int *)malloc(sizeof(int));
+	if (!ft_atoi(tmp, number))
+		return (write(2, "Error: the number is too long\n", 31), FALSE);
+	if (!new_lst(&lst, *number))
 		return (FALSE);
 	if (!add_back_lst(stack_a, &lst))
 		return (FALSE);
@@ -36,8 +39,10 @@ static int	create_stack_a(char *str, t_list **stack_a)
 
 static int	create_list(int argc, char *argv[])
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
+	t_list		*stack_a;
+	t_list		*stack_b;
+	t_commands	*cmd_ind;
+	t_commands	*cmd_gt;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -49,7 +54,7 @@ static int	create_list(int argc, char *argv[])
 			return (free_list(&stack_a), FALSE);
 		++argv;
 	}
-	mark_up(&stack_a, &stack_b);
+	cmd_ind = mark_up(&stack_a, &stack_b);
 	//print_lst(stack_a);
 	return (TRUE);
 }
