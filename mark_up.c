@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mark_up.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhleena <jhleena@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:39:51 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/01 12:57:14 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/01 13:05:32 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,18 +191,5 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 		new_lst_command(&tmp_cmd, "ra\n");
 		add_back_lst_commands(&cmd, &tmp_cmd);
 	}
-	// while (cmd)
-	// {
-	// 	length = 0;
-	// 	tmp_c = cmd->command;
-	// 	while (*tmp_c)
-	// 	{
-	// 		++length;
-	// 		++tmp_c;
-	// 	}
-	// 	write(1, cmd->command, length);
-	// 	//printf("%s", cmd->command);
-	// 	cmd = cmd->next;
-	// }
 	return (cmd);
 }
