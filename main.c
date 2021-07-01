@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
+/*   By: jhleena <jhleena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 19:09:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/30 13:52:41 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/01 12:54:32 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	create_list(int argc, char *argv[])
 			return (free_list(&stack_a), FALSE);
 		++argv;
 	}
-	cmd_ind = mark_up(&stack_a, &stack_b);
+	cmd_ind = mark_up(&stack_a, &stack_b, &get_index);
 	//print_lst(stack_a);
 	return (TRUE);
 }

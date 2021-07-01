@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mark_up.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
+/*   By: jhleena <jhleena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:39:51 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/30 13:55:58 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/01 12:57:14 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	do_r(t_list **stack_a, t_list **stack_b, t_list *cmd, t_commands **lst_cmd)
 	}
 }
 
-t_commands	*mark_up(t_list **stack_a, t_list **stack_b)
+t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_list *stack, t_list *elem))
 {
 	t_list	*tmp;
 	t_list	*tmp_min;
@@ -111,13 +111,13 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b)
 	tmp_cmd = NULL;
 	cmd = NULL;
 	tmp = *stack_a;
-	amount_min = get_index(*stack_a, tmp);
+	amount_min = markup_header(*stack_a, tmp);
 	
 	tmp_min = tmp;
 	tmp = tmp->next;
 	while (tmp && amount_min)
 	{
-		amount = get_index(*stack_a, tmp);
+		amount = markup_header(*stack_a, tmp);
 		if	(amount_min == amount)
 			if (tmp_min->index > tmp->index)
 				tmp_min = tmp;
@@ -128,12 +128,12 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b)
 		}
 		tmp = tmp->next;
 	}
-	if (get_index(*stack_a, tmp_min) == 0)
-		return ;
+	// if (get_index(*stack_a, tmp_min) == 0)
+	// 	return ;
 	while (*stack_a && amount_min != 1)
 	{
 		swap(stack_a);
-		amount = get_index(*stack_a, tmp_min);
+		amount = markup_header(*stack_a, tmp_min);
 		if (amount_min > amount)
 		{
 			amount_min = amount;
@@ -144,7 +144,7 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b)
 		else
 		{
 			swap(stack_a);
-			amount = get_index(*stack_a, tmp_min);
+			amount = markup_header(*stack_a, tmp_min);
 		}
 		if ((*stack_a)->in_stack == FALSE)
 		{
