@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 19:09:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/01 13:37:24 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/01 13:57:08 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,20 @@ int	check_length(t_commands *cmd_ind, t_commands *cmd_gt)
 
 	length_ind = 0;
 	length_gt = 0;
-	while (cmd_ind->next)
-	
+	while (cmd_ind)
+	{
+		++length_ind;
+		cmd_ind = cmd_ind->next;
+	}
+	while (cmd_gt)
+	{
+		++length_gt;
+		cmd_gt = cmd_gt->next;
+	}
+	if (cmd_gt > cmd_ind)
+		return (0);
+	if (cmd_gt <= cmd_ind)
+		return (1);
 }
 
 static int	create_list(int argc, char *argv[])
@@ -70,19 +82,40 @@ static int	create_list(int argc, char *argv[])
 	cmd_ind = mark_up(&stack_a, &stack_b, &get_index);
 	cmd_gt = mark_up(&stack_a, &stack_b, &greater_than);
 	//print_lst(stack_a);
-	length = 0;
-	while (cmd_ind)
+	length = check_length(cmd_ind, cmd_gt);
+	if (length ==  0)
 	{
 		length = 0;
-		tmp_c = cmd_ind->command;
-		while (*tmp_c)
+		while (cmd_ind)
 		{
-			++length;
-			++tmp_c;
+			length = 0;
+			tmp_c = cmd_ind->command;
+			while (*tmp_c)
+			{
+				++length;
+				++tmp_c;
+			}
+			write(1, cmd_ind->command, length);
+			//printf("%s", cmd->command);
+			cmd_ind = cmd_ind->next;
 		}
-		write(1, cmd_ind->command, length);
-		//printf("%s", cmd->command);
-		cmd_ind = cmd_ind->next;
+	}
+	else
+	{
+		length = 0;
+		while (cmd_gt)
+		{
+			length = 0;
+			tmp_c = cmd_gt->command;
+			while (*tmp_c)
+			{
+				++length;
+				++tmp_c;
+			}
+			write(1, cmd_gt->command, length);
+			//printf("%s", cmd->command);
+			cmd_gt = cmd_gt->next;
+		}
 	}
 	return (TRUE);
 }
