@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
+/*   By: jhleena <jhleena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 19:09:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/01 13:08:19 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/01 13:37:24 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,17 @@ static int	create_stack_a(char *str, t_list **stack_a)
 	return (TRUE);
 }
 
+int	check_length(t_commands *cmd_ind, t_commands *cmd_gt)
+{
+	int length_ind;
+	int	length_gt;
+
+	length_ind = 0;
+	length_gt = 0;
+	while (cmd_ind->next)
+	
+}
+
 static int	create_list(int argc, char *argv[])
 {
 	t_list		*stack_a;
@@ -57,6 +68,7 @@ static int	create_list(int argc, char *argv[])
 		++argv;
 	}
 	cmd_ind = mark_up(&stack_a, &stack_b, &get_index);
+	cmd_gt = mark_up(&stack_a, &stack_b, &greater_than);
 	//print_lst(stack_a);
 	length = 0;
 	while (cmd_ind)
