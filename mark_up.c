@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mark_up.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
+/*   By: jhleena <jhleena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:39:51 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/18 08:43:15 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/19 14:29:17 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 	amount_min = markup_header(*stack_a, tmp);
 	// printf("_____GT______\n");
 	// print_lst(*stack_a);
-	// printf("\n %d, index of elem %d \n", amount, tmp->index);
+	// printf("\n %d, index of elem %d \n", amount_min, tmp->index);
 	// printf("_____GT______\n\n");
 	tmp_min = tmp;
 	tmp = tmp->next;
@@ -139,12 +139,14 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 	// printf("_____GT______\n");
 	// print_lst(*stack_a);
 	// printf("_____GT______\n\n");
+	// printf("\n_______________________\n");
 	while (*stack_a && amount_min != 0)
 	{
 		swap(stack_a);
 		amount = markup_header(*stack_a, tmp_min);
 		if (amount_min > amount)
 		{
+			//printf("SWAP\n");
 			amount_min = amount;
 			//write(1, "sa\n", 3);
 			new_lst_command(&tmp_cmd, "sa\n");
@@ -152,7 +154,7 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 		}
 		else
 		{
-			//printf("VSE OK\n");
+			//printf("NO SWAP\n");
 			swap(stack_a);
 			amount = markup_header(*stack_a, tmp_min);
 		}
@@ -167,7 +169,8 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 			add_back_lst_commands(&cmd, &tmp_cmd);
 			--amount_min;
 		}
-		if ((*stack_a)->in_stack == TRUE)//4 3 2 5
+		if ((*stack_a)->in_stack == TRUE && amount_min)
+		//if ((*stack_a)->in_stack == TRUE)
 		{
 			rotate(stack_a);
 			//write(1, "ra\n", 3);
@@ -200,6 +203,11 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 		new_lst_command(&tmp_cmd, "pa\n");
 		add_back_lst_commands(&cmd, &tmp_cmd);
 	}
+
+	// printf("_____GT______\n");
+	// print_lst(*stack_a);
+	// printf("_____GT______\n\n");
+
 	while ((*stack_a)->index != 0)
 	{
 		rotate(stack_a);
