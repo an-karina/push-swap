@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:39:51 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/01 13:05:32 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/18 08:43:15 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	get_index(t_list *stack, t_list *elem)
 
 	elem->in_stack = TRUE;
 	tmp = elem->next;
-	amount = 1;
+	amount = 0;
 	index = elem->index;
 	if (tmp == NULL)
 		tmp = stack;
@@ -112,12 +112,19 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 	cmd = NULL;
 	tmp = *stack_a;
 	amount_min = markup_header(*stack_a, tmp);
-	
+	// printf("_____GT______\n");
+	// print_lst(*stack_a);
+	// printf("\n %d, index of elem %d \n", amount, tmp->index);
+	// printf("_____GT______\n\n");
 	tmp_min = tmp;
 	tmp = tmp->next;
 	while (tmp && amount_min)
 	{
 		amount = markup_header(*stack_a, tmp);
+		// printf("_____GT______\n");
+		// print_lst(*stack_a);
+		// printf("\n %d, index of elem %d \n", amount, tmp->index);
+		// printf("_____GT______\n\n");
 		if	(amount_min == amount)
 			if (tmp_min->index > tmp->index)
 				tmp_min = tmp;
@@ -128,9 +135,11 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 		}
 		tmp = tmp->next;
 	}
-	// if (get_index(*stack_a, tmp_min) == 0)
-	// 	return ;
-	while (*stack_a && amount_min != 1)
+	amount_min = markup_header(*stack_a, tmp_min);
+	// printf("_____GT______\n");
+	// print_lst(*stack_a);
+	// printf("_____GT______\n\n");
+	while (*stack_a && amount_min != 0)
 	{
 		swap(stack_a);
 		amount = markup_header(*stack_a, tmp_min);
@@ -143,9 +152,13 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 		}
 		else
 		{
+			//printf("VSE OK\n");
 			swap(stack_a);
 			amount = markup_header(*stack_a, tmp_min);
 		}
+		// printf("_____GT______\n");
+		// print_lst(*stack_a);
+		// printf("_____GT______\n\n");
 		if ((*stack_a)->in_stack == FALSE)
 		{
 			push(stack_b, stack_a);
@@ -154,13 +167,16 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 			add_back_lst_commands(&cmd, &tmp_cmd);
 			--amount_min;
 		}
-		if ((*stack_a)->in_stack == TRUE)
+		if ((*stack_a)->in_stack == TRUE)//4 3 2 5
 		{
 			rotate(stack_a);
 			//write(1, "ra\n", 3);
 			new_lst_command(&tmp_cmd, "ra\n");
 			add_back_lst_commands(&cmd, &tmp_cmd);
 		}
+		// printf("_____GT______\n");
+		// print_lst(*stack_a);
+		// printf("_____GT______\n\n");
 	}
 	while (*stack_b)
 	{
@@ -191,5 +207,7 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 		new_lst_command(&tmp_cmd, "ra\n");
 		add_back_lst_commands(&cmd, &tmp_cmd);
 	}
+	// printf("\n____STACK_A____\n");
+	// print_lst(*stack_a);
 	return (cmd);
 }

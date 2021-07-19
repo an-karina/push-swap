@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:01:45 by jhleena           #+#    #+#             */
-/*   Updated: 2021/06/30 11:15:56 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/13 18:35:51 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	new_lst_command(t_commands **lst, char *str)
 		++i;
 		tmp_str++;
 	}
+	(*lst)->command[i] = '\0';
 	(*lst)->next = NULL;
 }
 
