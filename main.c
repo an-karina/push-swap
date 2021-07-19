@@ -3,14 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhleena <jhleena@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 19:09:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/19 14:29:07 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:06:15 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int is_not_sorted(t_list	*stack_a)
+{
+	while (stack_a->next)
+	{
+		if (stack_a->index != stack_a->next->index - 1)
+			return (1);
+		stack_a = stack_a->next;
+	}
+	return (0);
+}
+
+void	algo_for_three(char **argv)
+{
+	t_list		*stack_a;
+
+	stack_a = NULL;
+	while (*argv)
+	{
+		if (!create_stack_a(*argv, &stack_a))
+			return (free_list(&stack_a));
+		++argv;
+	}
+	while (is_not_sorted(stack_a))
+	{
+		if (stack_a->next->index == 2 && stack_a->index == 1)
+		{
+			write(1, "rra\n", 4);
+			r_rotate(&stack_a);
+		}
+		else if (stack_a->number > stack_a->next->number && stack_a->number > stack_a->next->next->number)
+		{
+			write(1, "ra\n", 3);
+			rotate(&stack_a);
+		}
+		else if (stack_a->number > stack_a->next->number || stack_a->number < stack_a->next->number && stack_a->next->number > stack_a->next->next->number)
+		{
+			write(1, "sa\n", 3);
+			swap(&stack_a);
+		}
+	}
+}
 
 int	create_list(int argc, char *argv[])
 {
@@ -28,6 +70,11 @@ int	create_list(int argc, char *argv[])
 	tmp_stack_a = NULL;
 	if (argc == 1)
 		return (write(2, "Error: Wrong number of arguments\n", 34), FALSE);
+	if (argc == 4)
+	{
+		algo_for_three(argv);
+		return (0);
+	}
 	tmp_argv = argv;
 	while (*argv)
 	{
