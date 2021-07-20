@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:01:45 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/13 18:35:51 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/19 23:21:26 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	print_lst(t_list *lst)
 	}
 }
 
-void	new_lst_command(t_commands **lst, char *str)
+void	new_lst_command(t_cmd **lst, char *str)
 {
 	int		leangth;
 	int		i;
@@ -101,7 +101,7 @@ void	new_lst_command(t_commands **lst, char *str)
 		++leangth;
 		++str;
 	}
-	*lst = (t_commands *)malloc(sizeof(t_commands));
+	*lst = (t_cmd *)malloc(sizeof(t_cmd));
 	(*lst)->command = (char *)malloc(sizeof(char) * leangth + 1);
 	while (*tmp_str)
 	{
@@ -113,9 +113,9 @@ void	new_lst_command(t_commands **lst, char *str)
 	(*lst)->next = NULL;
 }
 
-void	add_back_lst_commands(t_commands **lst, t_commands **new_lst)
+void	add_back_lst_cmd(t_cmd **lst, t_cmd **new_lst)
 {
-	t_commands *tmp;
+	t_cmd *tmp;
 	
 	if (*lst == NULL)
 	{

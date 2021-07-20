@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 12:00:34 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/18 12:04:25 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/19 23:21:26 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	create_stack_a(char *str, t_list **stack_a)
 	return (TRUE);
 }
 
-int	check_length(t_commands *cmd_ind, t_commands *cmd_gt)
+int	check_length(t_cmd *cmd_ind, t_cmd *cmd_gt)
 {
 	int	length_ind;
 	int	length_gt;

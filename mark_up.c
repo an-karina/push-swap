@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mark_up.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhleena <jhleena@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:39:51 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/19 14:29:17 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/19 23:51:16 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ int	get_index(t_list *stack, t_list *elem)
 	return (amount);
 }
 
-void	do_r(t_list **stack_a, t_list **stack_b, t_list *cmd, t_commands **lst_cmd)
+void	do_r(t_list **stack_a, t_list **stack_b, t_list *cmd, t_cmd **lst_cmd)
 {
-	t_commands *tmp_cmd;
+	t_cmd *tmp_cmd;
 	
 	tmp_cmd = NULL;
 	while (cmd->steps.rr--)
 	{
 		//write(1, "rr\n", 3);
 		new_lst_command(&tmp_cmd, "rr\n");
-		add_back_lst_commands(lst_cmd, &tmp_cmd);
+		add_back_lst_cmd(lst_cmd, &tmp_cmd);
 		rotate(stack_a);
 		rotate(stack_b);
 	}
@@ -61,7 +61,7 @@ void	do_r(t_list **stack_a, t_list **stack_b, t_list *cmd, t_commands **lst_cmd)
 	{
 		//write(1, "rrr\n", 4);
 		new_lst_command(&tmp_cmd, "rrr\n");
-		add_back_lst_commands(lst_cmd, &tmp_cmd);
+		add_back_lst_cmd(lst_cmd, &tmp_cmd);
 		r_rotate(stack_a);
 		r_rotate(stack_b);
 	}
@@ -69,33 +69,33 @@ void	do_r(t_list **stack_a, t_list **stack_b, t_list *cmd, t_commands **lst_cmd)
 	{
 		//write(1, "ra\n", 3);
 		new_lst_command(&tmp_cmd, "ra\n");
-		add_back_lst_commands(lst_cmd, &tmp_cmd);
+		add_back_lst_cmd(lst_cmd, &tmp_cmd);
 		rotate(stack_a);
 	}
 	while (cmd->steps.rb--)
 	{
 		//write(1, "rb\n", 3);
 		new_lst_command(&tmp_cmd, "rb\n");
-		add_back_lst_commands(lst_cmd, &tmp_cmd);
+		add_back_lst_cmd(lst_cmd, &tmp_cmd);
 		rotate(stack_b);
 	}
 	while (cmd->steps.rrb--)
 	{
 		//write(1, "rrb\n", 4);
 		new_lst_command(&tmp_cmd, "rrb\n");
-		add_back_lst_commands(lst_cmd, &tmp_cmd);
+		add_back_lst_cmd(lst_cmd, &tmp_cmd);
 		r_rotate(stack_b);
 	}
 	while (cmd->steps.rra--)
 	{
 		//write(1, "rra\n", 4);
 		new_lst_command(&tmp_cmd, "rra\n");
-		add_back_lst_commands(lst_cmd, &tmp_cmd);
+		add_back_lst_cmd(lst_cmd, &tmp_cmd);
 		r_rotate(stack_a);
 	}
 }
 
-t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_list *stack, t_list *elem))
+t_cmd	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_head)(t_list *stack, t_list *elem))
 {
 	t_list	*tmp;
 	t_list	*tmp_min;
@@ -103,15 +103,15 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 	int		amount_min;
 	int		length;
 	char	*tmp_c;
-	t_commands	*cmd;
-	t_commands	*tmp_cmd;
+	t_cmd	*cmd;
+	t_cmd	*tmp_cmd;
 
 	tmp = NULL;
 	tmp_min = NULL;
 	tmp_cmd = NULL;
 	cmd = NULL;
 	tmp = *stack_a;
-	amount_min = markup_header(*stack_a, tmp);
+	amount_min = markup_head(*stack_a, tmp);
 	// printf("_____GT______\n");
 	// print_lst(*stack_a);
 	// printf("\n %d, index of elem %d \n", amount_min, tmp->index);
@@ -120,7 +120,7 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 	tmp = tmp->next;
 	while (tmp && amount_min)
 	{
-		amount = markup_header(*stack_a, tmp);
+		amount = markup_head(*stack_a, tmp);
 		// printf("_____GT______\n");
 		// print_lst(*stack_a);
 		// printf("\n %d, index of elem %d \n", amount, tmp->index);
@@ -135,7 +135,7 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 		}
 		tmp = tmp->next;
 	}
-	amount_min = markup_header(*stack_a, tmp_min);
+	amount_min = markup_head(*stack_a, tmp_min);
 	// printf("_____GT______\n");
 	// print_lst(*stack_a);
 	// printf("_____GT______\n\n");
@@ -143,20 +143,24 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 	while (*stack_a && amount_min != 0)
 	{
 		swap(stack_a);
-		amount = markup_header(*stack_a, tmp_min);
+		amount = markup_head(*stack_a, tmp_min);
+		// printf("_____GT______\n");
+		// print_lst(*stack_a);
+		// printf("_____GT______\n\n");
+		// printf("\n_______________________\n");
 		if (amount_min > amount)
 		{
 			//printf("SWAP\n");
 			amount_min = amount;
 			//write(1, "sa\n", 3);
 			new_lst_command(&tmp_cmd, "sa\n");
-			add_back_lst_commands(&cmd, &tmp_cmd);
+			add_back_lst_cmd(&cmd, &tmp_cmd);
 		}
 		else
 		{
 			//printf("NO SWAP\n");
 			swap(stack_a);
-			amount = markup_header(*stack_a, tmp_min);
+			amount = markup_head(*stack_a, tmp_min);
 		}
 		// printf("_____GT______\n");
 		// print_lst(*stack_a);
@@ -166,7 +170,7 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 			push(stack_b, stack_a);
 			//write(1, "pb\n", 3);
 			new_lst_command(&tmp_cmd, "pb\n");
-			add_back_lst_commands(&cmd, &tmp_cmd);
+			add_back_lst_cmd(&cmd, &tmp_cmd);
 			--amount_min;
 		}
 		if ((*stack_a)->in_stack == TRUE && amount_min)
@@ -175,7 +179,7 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 			rotate(stack_a);
 			//write(1, "ra\n", 3);
 			new_lst_command(&tmp_cmd, "ra\n");
-			add_back_lst_commands(&cmd, &tmp_cmd);
+			add_back_lst_cmd(&cmd, &tmp_cmd);
 		}
 		// printf("_____GT______\n");
 		// print_lst(*stack_a);
@@ -201,7 +205,7 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 		push(stack_a, stack_b);
 		//write(1, "pa\n", 3);
 		new_lst_command(&tmp_cmd, "pa\n");
-		add_back_lst_commands(&cmd, &tmp_cmd);
+		add_back_lst_cmd(&cmd, &tmp_cmd);
 	}
 
 	// printf("_____GT______\n");
@@ -213,7 +217,7 @@ t_commands	*mark_up(t_list **stack_a, t_list **stack_b, int (*markup_header)(t_l
 		rotate(stack_a);
 		//write(1, "ra\n", 3);
 		new_lst_command(&tmp_cmd, "ra\n");
-		add_back_lst_commands(&cmd, &tmp_cmd);
+		add_back_lst_cmd(&cmd, &tmp_cmd);
 	}
 	// printf("\n____STACK_A____\n");
 	// print_lst(*stack_a);

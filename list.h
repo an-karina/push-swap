@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhleena <jhleena@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:02:07 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/01 12:47:53 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/19 23:21:26 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ typedef struct s_commands
 {
 	char				*command;
 	struct s_commands	*next;
-}						t_commands;
+}						t_cmd;
 
 int		new_lst(t_list **lst, int number);
 int		add_back_lst(t_list **lst, t_list **lst_new);
 void	print_lst(t_list *lst);
 void	free_list(t_list **lst);
-void	new_lst_command(t_commands **lst, char *str);
-void	add_back_lst_commands(t_commands **lst, t_commands **new_lst);
+void	new_lst_command(t_cmd **lst, char *str);
+void	add_back_lst_cmd(t_cmd **lst, t_cmd **new_lst);
 
 #endif

@@ -6,27 +6,19 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 13:53:38 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/14 12:49:56 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/20 10:33:53 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	greater_than(t_list *stack, t_list *elem)
+
+
+int	loop(t_list *tmp, t_list *elem, t_list *end_of_stack, t_list *stack)
 {
-	int		amount;
-	t_list	*tmp;
-	t_list	*end_of_stack;
-	
+	int	amount;
+
 	amount = 0;
-	end_of_stack = NULL;
-	elem->in_stack = TRUE;
-	tmp = elem->next;
-	if (tmp == NULL)
-	{
-		end_of_stack = elem;
-		tmp = stack;
-	}
 	while (tmp != elem)
 	{
 		if (tmp && end_of_stack && end_of_stack->number < tmp->number)
@@ -43,11 +35,8 @@ int	greater_than(t_list *stack, t_list *elem)
 			tmp = tmp->next;
 		}
 		else if (!tmp)
-		{
-			//end_of_stack = tmp;
 			tmp = stack;
-		}
-		else 
+		else
 		{
 			while (tmp && tmp != elem)
 			{
@@ -57,8 +46,26 @@ int	greater_than(t_list *stack, t_list *elem)
 				if (!tmp)
 					tmp = stack;
 			}
-			break;
+			break ;
 		}
 	}
+	return (amount);
+}
+
+int	greater_than(t_list *stack, t_list *elem)
+{
+	int		amount;
+	t_list	*tmp;
+	t_list	*end_of_stack;
+
+	end_of_stack = NULL;
+	elem->in_stack = TRUE;
+	tmp = elem->next;
+	if (tmp == NULL)
+	{
+		end_of_stack = elem;
+		tmp = stack;
+	}
+	amount = loop(tmp, elem, end_of_stack, stack);
 	return (amount);
 }
