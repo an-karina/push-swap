@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 19:09:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/20 10:08:08 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/21 01:27:19 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ void	write_cmd(t_cmd *cmd_ind, t_cmd *cmd_gt)
 
 int	create_list(int argc, char *argv[])
 {
-	t_list		*tmp_stack_a;
 	t_cmd		*cmd_ind;
 	t_cmd		*cmd_gt;
 	char		**tmp_argv;
 
-	tmp_stack_a = NULL;
 	cmd_ind = NULL;
 	cmd_gt = NULL;
 	if (argc == 1)
@@ -65,6 +63,8 @@ int	create_list(int argc, char *argv[])
 	cmd_ind = using_algo(argv, &get_index);
 	cmd_gt = using_algo(argv, &greater_than);
 	write_cmd(cmd_ind, cmd_gt);
+	free_cmd_lst(&cmd_gt);
+	free_cmd_lst(&cmd_ind);
 	return (TRUE);
 }
 

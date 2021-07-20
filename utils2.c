@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 10:05:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/20 18:36:19 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/21 01:27:15 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ t_cmd	*using_algo(char **argv,
 	}
 	cmd_ind = mark_up(&stack_a, &stack_b, markup_head);
 	argv = argv_beg;
+	free_list(&stack_a);
 	return (cmd_ind);
 }

@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 12:00:34 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/19 23:21:26 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/21 01:30:13 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	create_stack_a(char *str, t_list **stack_a)
 {
-	int		*number;
+	// int		*number;
+	int		number;
 	char	*tmp;
 	t_list	*lst;
 
@@ -27,10 +28,9 @@ int	create_stack_a(char *str, t_list **stack_a)
 			return (write(2, "Error: invalid argument", 24), FALSE);
 		++(str);
 	}
-	number = (int *)malloc(sizeof(int));
-	if (!ft_atoi(tmp, number))
+	if (!ft_atoi(tmp, &number))
 		return (write(2, "Error: the number is too long\n", 31), FALSE);
-	if (!new_lst(&lst, *number))
+	if (!new_lst(&lst, number))
 		return (FALSE);
 	if (!add_back_lst(stack_a, &lst))
 		return (FALSE);
