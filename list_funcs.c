@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:01:45 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/19 23:21:26 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/20 17:21:08 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ int	new_lst(t_list **lst, int number)
 	return (TRUE);
 }
 
+int	make_ind(t_list **lst, t_list **lst_new)
+{
+	if ((*lst_new)->number == (*lst)->number)
+		return (write(2, "Error: duplicated number\n", 26), FALSE);
+	if ((*lst_new)->number > (*lst)->number)
+		++((*lst_new)->index);
+	else
+		++((*lst)->index);
+	return (1);
+}
+
 int	add_back_lst(t_list **lst, t_list **lst_new)
 {
 	t_list	*tmp;
@@ -44,20 +55,10 @@ int	add_back_lst(t_list **lst, t_list **lst_new)
 	tmp = *lst;
 	while ((*lst)->next != NULL)
 	{
-		if ((*lst_new)->number == (*lst)->number)
-			return (write(2, "Error: duplicated number\n", 26), FALSE);
-		if ((*lst_new)->number > (*lst)->number)
-			++((*lst_new)->index);
-		else
-			++((*lst)->index);
+		make_ind(lst, lst_new);
 		*lst = (*lst)->next;
 	}
-	if ((*lst_new)->number == (*lst)->number)
-		return (write(2, "Error: duplicated number\n", 26), FALSE);
-	if ((*lst_new)->number > (*lst)->number)
-		++((*lst_new)->index);
-	else
-		++((*lst)->index);
+	make_ind(lst, lst_new);
 	(*lst)->next = *lst_new;
 	(*lst_new)->previous = *lst;
 	*lst = tmp;
@@ -74,57 +75,4 @@ void	free_list(t_list **lst)
 		*lst = (*lst)->next;
 		free(tmp);
 	}
-}
-
-void	print_lst(t_list *lst)
-{
-	while (lst)
-	{
-		printf("%d index = %d ", lst->number, lst->index);
-		(lst->in_stack == TRUE) ? printf("true ") : printf("false ");
-		printf("%d\n", lst->comands);
-		lst = lst->next;
-	}
-}
-
-void	new_lst_command(t_cmd **lst, char *str)
-{
-	int		leangth;
-	int		i;
-	char	*tmp_str;
-
-	leangth = 0;
-	i = 0;
-	tmp_str = str;
-	while (*str)
-	{
-		++leangth;
-		++str;
-	}
-	*lst = (t_cmd *)malloc(sizeof(t_cmd));
-	(*lst)->command = (char *)malloc(sizeof(char) * leangth + 1);
-	while (*tmp_str)
-	{
-		(*lst)->command[i] = *tmp_str;
-		++i;
-		tmp_str++;
-	}
-	(*lst)->command[i] = '\0';
-	(*lst)->next = NULL;
-}
-
-void	add_back_lst_cmd(t_cmd **lst, t_cmd **new_lst)
-{
-	t_cmd *tmp;
-	
-	if (*lst == NULL)
-	{
-		*lst = *new_lst;
-		return ;
-	}
-	tmp = *lst;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = *new_lst;
-	return ; 
 }

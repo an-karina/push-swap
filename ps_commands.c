@@ -6,13 +6,13 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:16:48 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/02 13:39:52 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/20 18:34:42 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_list **stack) // tmp1 tmp2 3
+void	swap(t_list **stack)
 {
 	t_list	*tmp_1;
 	t_list	*tmp_2;
@@ -20,7 +20,7 @@ void	swap(t_list **stack) // tmp1 tmp2 3
 	tmp_1 = *stack;
 	tmp_2 = (*stack)->next;
 	if (!tmp_2)
-		return;
+		return ;
 	(*stack)->next = tmp_2->next;
 	tmp_2->previous = NULL;
 	tmp_2->next = tmp_1;
@@ -45,7 +45,6 @@ void	rotate(t_list **stack)
 	t_list	*tmp;
 
 	tmp = *stack;
-
 	if (!tmp->next)
 		return ;
 	while (tmp->next)
@@ -63,7 +62,7 @@ void	r_rotate(t_list **stack)
 
 	tmp = *stack;
 	if (!tmp || !tmp->next)
-		return;
+		return ;
 	while (tmp->next && tmp->next->next)
 		tmp = tmp->next;
 	tmp->next->next = *stack;
