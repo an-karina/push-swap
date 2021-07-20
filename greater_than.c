@@ -6,13 +6,26 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 13:53:38 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/20 10:33:53 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/20 17:05:29 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	if_eos_true(t_list **tmp, t_list **end_of_stack)
+{
+	(*tmp)->in_stack = TRUE;
+	*end_of_stack = NULL;
+	*tmp = (*tmp)->next;
+}
 
+void	if_true(t_list **tmp, t_list **end_of_stack)
+{
+	(*tmp)->in_stack = TRUE;
+	if (!(*tmp)->next)
+		*end_of_stack = *tmp;
+	*tmp = (*tmp)->next;
+}
 
 int	loop(t_list *tmp, t_list *elem, t_list *end_of_stack, t_list *stack)
 {
@@ -22,18 +35,9 @@ int	loop(t_list *tmp, t_list *elem, t_list *end_of_stack, t_list *stack)
 	while (tmp != elem)
 	{
 		if (tmp && end_of_stack && end_of_stack->number < tmp->number)
-		{
-			tmp->in_stack = TRUE;
-			end_of_stack = NULL;
-			tmp = tmp->next;
-		}
+			if_eos_true(&tmp, &end_of_stack);
 		else if (tmp && tmp->previous && tmp->previous->number < tmp->number)
-		{
-			tmp->in_stack = TRUE;
-			if (!tmp->next)
-				end_of_stack = tmp;
-			tmp = tmp->next;
-		}
+			if_true(&tmp, &end_of_stack);
 		else if (!tmp)
 			tmp = stack;
 		else
