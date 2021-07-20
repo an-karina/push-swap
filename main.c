@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 19:09:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 01:27:19 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/21 01:43:33 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	alg_write(t_cmd *cmd)
 void	write_cmd(t_cmd *cmd_ind, t_cmd *cmd_gt)
 {
 	int			length;
-	char		*tmp_c;
 
 	length = check_length(cmd_ind, cmd_gt);
 	if (length == 0)

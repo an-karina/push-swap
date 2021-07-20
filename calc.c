@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:51:41 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/20 10:13:55 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/21 01:43:10 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	command_calculator(t_list *stack_a, t_list *stack_b, t_list *elem)
 	int	place_in_b;
 	int	size_of_a;
 	int	size_of_b;
-	int	result;
 
 	elem->steps = (t_step){0, 0, 0, 0, 0, 0};
 	place_in_b = place_in_satck(stack_b, elem->index);

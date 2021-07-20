@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:39:51 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 00:56:15 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/21 01:44:19 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	stack_b_smth(t_list **stack_b, t_list **stack_a,
 {
 	t_list	*tmp;
 	t_list	*tmp_min;
-	t_cmd	*tmp_cmd;
 
 	while (*stack_b)
 	{

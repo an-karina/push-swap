@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 17:20:32 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 01:14:46 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/21 01:35:02 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,6 @@ void free_cmd_lst(t_cmd **lst)
 		free(*lst);
 		*lst = tmp_cmd;
 	}
+	free((*lst)->command);
+	free(*lst);
 }
