@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:39:51 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 01:44:19 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/22 18:32:29 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,12 @@ t_cmd	*mark_up(t_list **stack_a, t_list **stack_b,
 	while (*stack_a && amount_min != 0)
 	{
 		swap(stack_a);
+		if (!is_not_sorted(*stack_a))
+		{
+			new_lst_add_back(&cmd, "sa\n");
+			amount_min = 0;
+			break ;
+		}
 		amount = markup_head(*stack_a, tmp_min);
 		if (amount_min > amount)
 			amount_min = amount, new_lst_add_back(&cmd, "sa\n");

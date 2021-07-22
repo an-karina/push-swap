@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:01:45 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/20 17:21:08 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/22 13:23:22 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ int	add_back_lst(t_list **lst, t_list **lst_new)
 	tmp = *lst;
 	while ((*lst)->next != NULL)
 	{
-		make_ind(lst, lst_new);
+		if (!make_ind(lst, lst_new))
+			return (FALSE);
 		*lst = (*lst)->next;
 	}
-	make_ind(lst, lst_new);
+	if (!make_ind(lst, lst_new))
+			return (FALSE);
 	(*lst)->next = *lst_new;
 	(*lst_new)->previous = *lst;
 	*lst = tmp;

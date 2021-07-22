@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 10:05:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 01:27:15 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/22 18:20:39 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 int	is_not_sorted(t_list *stack_a)
 {
-	while (stack_a->next)
+	t_list	*tmp;
+
+	tmp = stack_a;
+	while (tmp->next)
 	{
-		if (stack_a->index != stack_a->next->index - 1)
+		if (tmp->index + 1 != tmp->next->index)
 			return (1);
-		stack_a = stack_a->next;
+		tmp = tmp->next;
 	}
 	return (0);
 }

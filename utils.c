@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 12:00:34 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 01:30:13 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/21 01:55:48 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	create_stack_a(char *str, t_list **stack_a)
 {
-	// int		*number;
 	int		number;
 	char	*tmp;
 	t_list	*lst;

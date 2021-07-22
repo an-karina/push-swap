@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 17:20:32 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 01:35:02 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/22 13:05:29 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,12 @@ void	new_lst_add_back(t_cmd **lst_cmd, char *s)
 	add_back_lst_cmd(lst_cmd, &tmp_cmd);
 }
 
-void free_cmd_lst(t_cmd **lst)
+void	free_cmd_lst(t_cmd **lst)
 {
 	t_cmd	*tmp_cmd;
 
+	if (*lst == NULL)
+		return ;
 	while ((*lst)->next)
 	{
 		tmp_cmd = (*lst)->next;

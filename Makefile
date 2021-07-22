@@ -1,35 +1,34 @@
-NAME	= push_swap
-SRCDIR	= ./
-OBJDIR	= ./
-SRC		= ${SRCDIR}calc.c\
-		  ${SRCDIR}calc2.c\
-		  ${SRCDIR}get_index.c\
-		  ${SRCDIR}greater_than.c\
-		  ${SRCDIR}list_cmd.c\
-		  ${SRCDIR}list_funcs.c\
-		  ${SRCDIR}main.c\
-		  ${SRCDIR}mark_up.c\
-		  ${SRCDIR}parser_utils.c\
-		  ${SRCDIR}ps_commands.c\
-		  ${SRCDIR}utils.c\
-		  ${SRCDIR}utils2.c\
+SRC		= calc.c\
+		  calc2.c\
+		  get_index.c\
+		  greater_than.c\
+		  list_cmd.c\
+		  list_funcs.c\
+		  main.c\
+		  mark_up.c\
+		  parser_utils.c\
+		  ps_commands.c\
+		  utils.c\
+		  utils2.c\
 
-OBJ		= ${patsubst ${SRCDIR}%.c, ${OBJDIR}%.o, ${SRC}}
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+OBJS		= $(SRC:.c=.o)
 
-${OBJDIR}%.o: ${SRCDIR}%.c
-	${CC} ${CFLAGS} -c $< -o push_swap
+CC			= gcc -g -O2
+RM			= rm -f
+NAME		= push_swap
 
-${NAME}: ${OBJ}
-	gcc ${NAME} ${OBJ}
+all:		$(NAME)
 
-all:  ${NAME}
+$(NAME):	 $(OBJS)
+				gcc -g ${OBJS} -o push_swap
+				@echo "Done"
 
 clean:
-	rm -rf ${OBJ}
+				$(RM) $(OBJS)
 
-fclean: clean
-	rm -rf ${NAME}
+fclean:
+				$(RM) $(NAME)
 
-re: fclean all
+re:			fclean $(NAME)
+
+.PHONY:			all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 19:09:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 01:43:33 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/22 13:46:57 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	create_list(int argc, char *argv[])
 	cmd_ind = NULL;
 	cmd_gt = NULL;
 	if (argc == 1)
-		return (write(2, "Error: Wrong number of arguments\n", 34), FALSE);
+		return (write(2, "\n", 1), FALSE);
 	if (argc == 4)
 	{
 		algo_for_three(argv);
@@ -60,6 +60,8 @@ int	create_list(int argc, char *argv[])
 	}
 	tmp_argv = argv;
 	cmd_ind = using_algo(argv, &get_index);
+	if (cmd_ind == NULL)
+		return (0);
 	cmd_gt = using_algo(argv, &greater_than);
 	write_cmd(cmd_ind, cmd_gt);
 	free_cmd_lst(&cmd_gt);
