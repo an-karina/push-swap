@@ -6,13 +6,13 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:39:51 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/22 18:32:29 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/23 19:32:42 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	do_r(t_list **stack_a, t_list **stack_b, t_list *cmd, t_cmd **lst_cmd)
+void	do_r(t_lst **stack_a, t_lst **stack_b, t_lst *cmd, t_cmd **lst_cmd)
 {
 	t_cmd	*tmp_cmd;
 
@@ -37,41 +37,40 @@ void	do_r(t_list **stack_a, t_list **stack_b, t_list *cmd, t_cmd **lst_cmd)
 		new_lst_add_back(lst_cmd, "rra\n"), r_rotate(stack_a);
 }
 
-t_list	*find_header(t_list **stack_a,
-	int (*markup_head)(t_list *stack, t_list *elem))
+t_lst	*find_header(t_lst **stack_a,
+	int (*m_head)(t_lst *stack, t_lst *elem), t_lst **tmp_min)
 {
-	t_list	*tmp;
-	t_list	*tmp_min;
+	t_lst	*tmp;
 	int		amount;
 	int		amount_min;
 
 	tmp = NULL;
-	tmp_min = NULL;
+	(*tmp_min) = NULL;
 	tmp = *stack_a;
-	amount_min = markup_head(*stack_a, tmp);
-	tmp_min = tmp;
+	amount_min = m_head(*stack_a, tmp);
+	(*tmp_min) = tmp;
 	tmp = tmp->next;
 	while (tmp && amount_min)
 	{
-		amount = markup_head(*stack_a, tmp);
+		amount = m_head(*stack_a, tmp);
 		if (amount_min == amount)
-			if (tmp_min->index > tmp->index)
-				tmp_min = tmp;
+			if ((*tmp_min)->index > tmp->index)
+				(*tmp_min) = tmp;
 		if (amount_min > amount)
 		{
 			amount_min = amount;
-			tmp_min = tmp;
+			(*tmp_min) = tmp;
 		}
 		tmp = tmp->next;
 	}
-	return (tmp_min);
+	return (*tmp_min);
 }
 
-void	stack_b_smth(t_list **stack_b, t_list **stack_a,
+void	stack_b_smth(t_lst **stack_b, t_lst **stack_a,
 	int *amount_min, t_cmd **cmd)
 {
-	t_list	*tmp;
-	t_list	*tmp_min;
+	t_lst	*tmp;
+	t_lst	*tmp_min;
 
 	while (*stack_b)
 	{
@@ -96,7 +95,7 @@ void	stack_b_smth(t_list **stack_b, t_list **stack_a,
 	}
 }
 
-void	true_or_false(t_list **st_a, t_list **st_b, t_cmd **cmd, int *amount)
+void	true_or_false(t_lst **st_a, t_lst **st_b, t_cmd **cmd, int *amount)
 {
 	t_cmd	*tmp_cmd;
 
@@ -110,31 +109,28 @@ void	true_or_false(t_list **st_a, t_list **st_b, t_cmd **cmd, int *amount)
 		rotate(st_a), new_lst_add_back(cmd, "ra\n");
 }
 
-t_cmd	*mark_up(t_list **stack_a, t_list **stack_b,
-	int (*markup_head)(t_list *stack, t_list *elem))
+t_cmd	*mark_up(t_lst **stack_a, t_lst **stack_b,
+	int (*m_head)(t_lst *stack, t_lst *elem))
 {
-	t_list	*tmp_min;
+	t_lst	*tmp_min;
 	int		amount;
 	int		amount_min;
 	t_cmd	*cmd;
 
-	cmd = NULL;
-	tmp_min = find_header(stack_a, markup_head);
-	amount_min = markup_head(*stack_a, tmp_min);
+	cmd = NULL, find_header(stack_a, m_head, &tmp_min);
+	amount_min = m_head(*stack_a, tmp_min);
 	while (*stack_a && amount_min != 0)
 	{
-		swap(stack_a);
-		if (!is_not_sorted(*stack_a))
+		if (swap(stack_a))
 		{
-			new_lst_add_back(&cmd, "sa\n");
-			amount_min = 0;
+			new_lst_add_back(&cmd, "sa\n"), amount_min = 0;
 			break ;
 		}
-		amount = markup_head(*stack_a, tmp_min);
+		amount = m_head(*stack_a, tmp_min);
 		if (amount_min > amount)
 			amount_min = amount, new_lst_add_back(&cmd, "sa\n");
 		else
-			swap(stack_a), amount = markup_head(*stack_a, tmp_min);
+			swap(stack_a), amount = m_head(*stack_a, tmp_min);
 		true_or_false(stack_a, stack_b, &cmd, &amount_min);
 	}
 	stack_b_smth(stack_b, stack_a, &amount_min, &cmd);

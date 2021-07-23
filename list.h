@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:02:07 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 01:14:10 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/23 15:32:10 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_list
 	t_step			steps;
 	struct s_list	*next;
 	struct s_list	*previous;
-}					t_list;
+}					t_lst;
 
 typedef struct s_commands
 {
@@ -40,10 +40,10 @@ typedef struct s_commands
 	struct s_commands	*next;
 }						t_cmd;
 
-int		new_lst(t_list **lst, int number);
-int		add_back_lst(t_list **lst, t_list **lst_new);
-void	print_lst(t_list *lst);
-void	free_list(t_list **lst);
+int		new_lst(t_lst **lst, int number);
+int		add_back_lst(t_lst **lst, t_lst **lst_new);
+void	print_lst(t_lst *lst);
+void	free_list(t_lst **lst);
 void	new_lst_command(t_cmd **lst, char *str);
 void	add_back_lst_cmd(t_cmd **lst, t_cmd **new_lst);
 void	new_lst_add_back(t_cmd **lst_cmd, char *s);

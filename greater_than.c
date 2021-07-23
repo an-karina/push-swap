@@ -6,20 +6,20 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 13:53:38 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/20 17:05:29 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/23 15:32:10 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	if_eos_true(t_list **tmp, t_list **end_of_stack)
+void	if_eos_true(t_lst **tmp, t_lst **end_of_stack)
 {
 	(*tmp)->in_stack = TRUE;
 	*end_of_stack = NULL;
 	*tmp = (*tmp)->next;
 }
 
-void	if_true(t_list **tmp, t_list **end_of_stack)
+void	if_true(t_lst **tmp, t_lst **end_of_stack)
 {
 	(*tmp)->in_stack = TRUE;
 	if (!(*tmp)->next)
@@ -27,7 +27,7 @@ void	if_true(t_list **tmp, t_list **end_of_stack)
 	*tmp = (*tmp)->next;
 }
 
-int	loop(t_list *tmp, t_list *elem, t_list *end_of_stack, t_list *stack)
+int	loop(t_lst *tmp, t_lst *elem, t_lst *end_of_stack, t_lst *stack)
 {
 	int	amount;
 
@@ -56,11 +56,11 @@ int	loop(t_list *tmp, t_list *elem, t_list *end_of_stack, t_list *stack)
 	return (amount);
 }
 
-int	greater_than(t_list *stack, t_list *elem)
+int	greater_than(t_lst *stack, t_lst *elem)
 {
 	int		amount;
-	t_list	*tmp;
-	t_list	*end_of_stack;
+	t_lst	*tmp;
+	t_lst	*end_of_stack;
 
 	end_of_stack = NULL;
 	elem->in_stack = TRUE;

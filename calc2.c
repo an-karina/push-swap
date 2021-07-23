@@ -6,13 +6,13 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 10:12:48 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/20 10:14:15 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/23 15:32:10 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	size_of_lst(t_list *lst)
+int	size_of_lst(t_lst *lst)
 {
 	int	size;
 
@@ -25,7 +25,7 @@ int	size_of_lst(t_list *lst)
 	return (size);
 }
 
-int	place_in_satck(t_list *stack, int index)
+int	place_in_satck(t_lst *stack, int index)
 {
 	int	place;
 
@@ -38,7 +38,7 @@ int	place_in_satck(t_list *stack, int index)
 	return (place);
 }
 
-int	find_index(t_list *stack, int index)
+int	find_index(t_lst *stack, int index)
 {
 	int	ind_min;
 	int	ind_max;

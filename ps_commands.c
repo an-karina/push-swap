@@ -6,31 +6,34 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:16:48 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/20 18:34:42 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/23 19:23:38 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_list **stack)
+int	swap(t_lst **stack)
 {
-	t_list	*tmp_1;
-	t_list	*tmp_2;
+	t_lst	*tmp_1;
+	t_lst	*tmp_2;
 
 	tmp_1 = *stack;
 	tmp_2 = (*stack)->next;
 	if (!tmp_2)
-		return ;
+		return (0);
 	(*stack)->next = tmp_2->next;
 	tmp_2->previous = NULL;
 	tmp_2->next = tmp_1;
 	tmp_2->next->previous = tmp_1;
 	*stack = tmp_2;
+	if (!is_not_sorted(*stack))
+		return (1);
+	return (0);
 }
 
-void	push(t_list **stack_1, t_list **stack_2)
+void	push(t_lst **stack_1, t_lst **stack_2)
 {
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	tmp = *stack_1;
 	*stack_1 = *stack_2;
@@ -40,9 +43,9 @@ void	push(t_list **stack_1, t_list **stack_2)
 	(*stack_1)->next = tmp;
 }
 
-void	rotate(t_list **stack)
+void	rotate(t_lst **stack)
 {
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	tmp = *stack;
 	if (!tmp->next)
@@ -56,9 +59,9 @@ void	rotate(t_list **stack)
 	tmp->next->previous = tmp;
 }
 
-void	r_rotate(t_list **stack)
+void	r_rotate(t_lst **stack)
 {
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	tmp = *stack;
 	if (!tmp || !tmp->next)

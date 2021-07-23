@@ -6,17 +6,17 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:01:45 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/22 13:23:22 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/23 15:32:10 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	new_lst(t_list **lst, int number)
+int	new_lst(t_lst **lst, int number)
 {
 	if (number < -2147483648 || number > 2147483647)
 		return (write(2, "Error: overflow\n", 17), FALSE);
-	*lst = (t_list *)malloc(sizeof(t_list));
+	*lst = (t_lst *)malloc(sizeof(t_lst));
 	(*lst)->number = number;
 	(*lst)->in_stack = FALSE;
 	(*lst)->index = 0;
@@ -32,7 +32,7 @@ int	new_lst(t_list **lst, int number)
 	return (TRUE);
 }
 
-int	make_ind(t_list **lst, t_list **lst_new)
+int	make_ind(t_lst **lst, t_lst **lst_new)
 {
 	if ((*lst_new)->number == (*lst)->number)
 		return (write(2, "Error: duplicated number\n", 26), FALSE);
@@ -43,9 +43,9 @@ int	make_ind(t_list **lst, t_list **lst_new)
 	return (1);
 }
 
-int	add_back_lst(t_list **lst, t_list **lst_new)
+int	add_back_lst(t_lst **lst, t_lst **lst_new)
 {
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	if (*lst == NULL)
 	{
@@ -60,16 +60,16 @@ int	add_back_lst(t_list **lst, t_list **lst_new)
 		*lst = (*lst)->next;
 	}
 	if (!make_ind(lst, lst_new))
-			return (FALSE);
+		return (FALSE);
 	(*lst)->next = *lst_new;
 	(*lst_new)->previous = *lst;
 	*lst = tmp;
 	return (TRUE);
 }
 
-void	free_list(t_list **lst)
+void	free_list(t_lst **lst)
 {
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	while (*lst)
 	{

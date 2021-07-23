@@ -6,17 +6,17 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 12:00:34 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 01:55:48 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/23 15:32:10 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	create_stack_a(char *str, t_list **stack_a)
+int	create_stack_a(char *str, t_lst **stack_a)
 {
 	int		number;
 	char	*tmp;
-	t_list	*lst;
+	t_lst	*lst;
 
 	tmp = str;
 	if (*str == '-' && ft_is_digit(*(str + 1)))

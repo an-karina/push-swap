@@ -6,16 +6,16 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 17:24:13 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/20 23:59:59 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/23 15:32:10 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_index(t_list *stack, t_list *elem)
+int	get_index(t_lst *stack, t_lst *elem)
 {
 	int		amount;
-	t_list	*tmp;
+	t_lst	*tmp;
 	int		index;
 
 	elem->in_stack = TRUE;

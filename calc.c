@@ -6,7 +6,7 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:51:41 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/21 01:43:10 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/23 15:32:10 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	rrb(int *place_in_b, int max)
 	return (amount);
 }
 
-int	command_calculator(t_list *stack_a, t_list *stack_b, t_list *elem)
+int	command_calculator(t_lst *stack_a, t_lst *stack_b, t_lst *elem)
 {
 	int	place_in_a;
 	int	place_in_b;

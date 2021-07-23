@@ -6,15 +6,15 @@
 /*   By: jhleena <jhleena@student.42.f>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 10:05:09 by jhleena           #+#    #+#             */
-/*   Updated: 2021/07/22 18:20:39 by jhleena          ###   ########.fr       */
+/*   Updated: 2021/07/23 15:32:10 by jhleena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_not_sorted(t_list *stack_a)
+int	is_not_sorted(t_lst *stack_a)
 {
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	tmp = stack_a;
 	while (tmp->next)
@@ -28,7 +28,7 @@ int	is_not_sorted(t_list *stack_a)
 
 void	algo_for_three(char **argv)
 {
-	t_list		*st_a;
+	t_lst		*st_a;
 
 	st_a = NULL;
 	while (*argv)
@@ -50,10 +50,10 @@ void	algo_for_three(char **argv)
 }
 
 t_cmd	*using_algo(char **argv,
-	int (*markup_head)(t_list *stack, t_list *elem))
+	int (*m_head)(t_lst *stack, t_lst *elem))
 {
-	t_list		*stack_a;
-	t_list		*stack_b;
+	t_lst		*stack_a;
+	t_lst		*stack_b;
 	t_cmd		*cmd_ind;
 	char		**argv_beg;
 
@@ -66,7 +66,7 @@ t_cmd	*using_algo(char **argv,
 			return (free_list(&stack_a), NULL);
 		++argv;
 	}
-	cmd_ind = mark_up(&stack_a, &stack_b, markup_head);
+	cmd_ind = mark_up(&stack_a, &stack_b, m_head);
 	argv = argv_beg;
 	free_list(&stack_a);
 	return (cmd_ind);
